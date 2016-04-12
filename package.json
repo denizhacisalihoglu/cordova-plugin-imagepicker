@@ -1,0 +1,17 @@
+{
+  "name": "multi-image-picker",
+  "version": "0.0.1",
+  "description": "Pick Multiple Image for Android",
+  "cordova": {
+    "id": "com.lihau.multiimagepicker",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Tan Li Hau",
+  "license": "ISC"
+}

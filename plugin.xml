@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.lihau.multiimagepicker" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>multi-image-picker</name>
+    <js-module name="MultiImagePicker" src="www/multi-image-picker.js">
+        <clobbers target="cordova.plugins.multi-image-picker" />
+    </js-module>
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MultiImagePicker">
+                <param name="android-package" value="com.lihau.imagepicker.MultiImagePicker"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                android:configChanges="orientation|screenSize"
+                android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+                android:theme="@style/AppTheme.NoActionBar" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <source-file src="src/android/com/lihau/imagepicker/FakeR.java" target-dir="src/com/lihau/imagepicker"/>
+        <source-file src="src/android/com/lihau/imagepicker/MultiImagePicker.java" target-dir="src/com/lihau/imagepicker"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/adapter/FolderAdapter.java" target-dir="src/me/nereo/multi_image_selector/adapter"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/adapter/ImageGridAdapter.java" target-dir="src/me/nereo/multi_image_selector/adapter"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/bean/Folder.java" target-dir="src/me/nereo/multi_image_selector/bean"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/bean/Image.java" target-dir="src/me/nereo/multi_image_selector/bean"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/MultiImageSelectorActivity.java" target-dir="src/me/nereo/multi_image_selector"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/MultiImageSelectorFragment.java" target-dir="src/me/nereo/multi_image_selector"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/utils/FileUtils.java" target-dir="src/me/nereo/multi_image_selector/utils"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/utils/ScreenUtils.java" target-dir="src/me/nereo/multi_image_selector/utils"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/utils/TimeUtils.java" target-dir="src/me/nereo/multi_image_selector/utils"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/view/SquaredImageView.java" target-dir="src/me/nereo/multi_image_selector/view"/>
+        <source-file src="src/android/Library/src/me/nereo/multi_image_selector/view/SquareFrameLayout.java" target-dir="src/me/nereo/multi_image_selector/view"/>
+
+        <source-file src="src/android/Library/src/res/color/multiimage_default_text_color.xml" target-dir="res/color"/>
+        <source-file src="src/android/Library/src/res/color/multiimage_folder_text_color.xml" target-dir="res/color"/>
+        <source-file src="src/android/Library/src/res/drawable/multiimage_action_btn.xml" target-dir="res/drawable"/>
+        <source-file src="src/android/Library/src/res/drawable-xhdpi/multiimage_btn_back.png" target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/Library/src/res/drawable-xxhdpi/multiimage_asy.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/Library/src/res/drawable-xxhdpi/multiimage_btn_selected.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/Library/src/res/drawable-xxhdpi/multiimage_btn_unselected.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/Library/src/res/drawable-xxhdpi/multiimage_default_check.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/Library/src/res/drawable-xxhdpi/multiimage_default_error.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/Library/src/res/drawable-xxhdpi/multiimage_text_indicator.png" target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/Library/src/res/layout/activity_multiimage.xml" target-dir="res/layout"/>
+        <source-file src="src/android/Library/src/res/layout/cmp_customer_actionbar.xml" target-dir="res/layout"/>
+        <source-file src="src/android/Library/src/res/layout/fragment_multi_image.xml" target-dir="res/layout"/>
+        <source-file src="src/android/Library/src/res/layout/list_item_camera.xml" target-dir="res/layout"/>
+        <source-file src="src/android/Library/src/res/layout/list_item_folder.xml" target-dir="res/layout"/>
+        <source-file src="src/android/Library/src/res/layout/list_item_image.xml" target-dir="res/layout"/>
+        <source-file src="src/android/Library/src/res/layout-v14/fragment_multi_image.xml" target-dir="res/layout-v14"/>
+        <source-file src="src/android/Library/src/res/values/multiimage_strings.xml" target-dir="res/values"/>
+        <source-file src="src/android/Library/src/res/values/multiimage_styles.xml" target-dir="res/values"/>
+        <source-file src="src/android/Library/src/res/values-sw360dp/multiimage_dimens.xml" target-dir="res/values-sw360dp"/>
+        <source-file src="src/android/Library/src/res/values-sw480dp/multiimage_dimens.xml" target-dir="res/values-sw480dp"/>
+        <source-file src="src/android/Library/src/res/values-sw720dp/multiimage_dimens.xml" target-dir="res/values-sw720dp"/>
+
+        <framework src="com.android.support:appcompat-v7:22.2.0" />
+        <framework src="com.squareup.picasso:picasso:2.4.0" />
+    </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MultiImagePicker">
+                <param name="ios-package" value="MIPicker"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/MIPicker.h" />
+        <source-file src="src/ios/MIPicker.m" />
+
+        <header-file src="src/ios/GMImagePicker/GMAlbumsViewCell.h" />
+        <source-file src="src/ios/GMImagePicker/GMAlbumsViewCell.m" />
+
+        <header-file src="src/ios/GMImagePicker/GMAlbumsViewController.h" />
+        <source-file src="src/ios/GMImagePicker/GMAlbumsViewController.m" />
+
+        <header-file src="src/ios/GMImagePicker/GMGridViewCell.h" />
+        <source-file src="src/ios/GMImagePicker/GMGridViewCell.m" />
+
+        <header-file src="src/ios/GMImagePicker/GMGridViewController.h" />
+        <source-file src="src/ios/GMImagePicker/GMGridViewController.m" />
+
+        <header-file src="src/ios/GMImagePicker/GMImagePickerController.h" />
+        <source-file src="src/ios/GMImagePicker/GMImagePickerController.m" />
+
+       <resource-file src="src/ios/GMImagePicker/Resource/GMEmptyFolder@1x.png" />
+       <resource-file src="src/ios/GMImagePicker/Resource/GMEmptyFolder@2x.png" />
+       <resource-file src="src/ios/GMImagePicker/Resource/GMSelected.png" />
+       <resource-file src="src/ios/GMImagePicker/Resource/GMSelected@2x.png" />
+       <resource-file src="src/ios/GMImagePicker/Resource/GMVideoIcon.png" />
+       <resource-file src="src/ios/GMImagePicker/Resource/GMVideoIcon@2x.png" />
+       <resource-file src="src/ios/GMImagePicker/Resource/GMImagePicker.strings" />
+       
+    </platform>
+</plugin>
