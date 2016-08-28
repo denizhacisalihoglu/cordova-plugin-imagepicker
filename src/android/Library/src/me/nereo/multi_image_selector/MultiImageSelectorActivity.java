@@ -1,12 +1,17 @@
 package me.nereo.multi_image_selector;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lihau.imagepicker.FakeR;
 
@@ -30,6 +35,10 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
     public static final String EXTRA_RESULT = "select_result";
     /** 默认选择集 */
     public static final String EXTRA_DEFAULT_SELECTED_LIST = "default_list";
+    /** theme color **/
+    public static final String EXTRA_THEME_COLOR = "theme_color";
+    /** text color **/
+    public static final String EXTRA_TEXT_COLOR = "text_color";
 
     /** 单选 */
     public static final int MODE_SINGLE = 0;
@@ -50,15 +59,19 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
         mDefaultCount = intent.getIntExtra(EXTRA_SELECT_COUNT, 9);
         int mode = intent.getIntExtra(EXTRA_SELECT_MODE, MODE_MULTI);
         boolean isShow = intent.getBooleanExtra(EXTRA_SHOW_CAMERA, true);
-        if(mode == MODE_MULTI && intent.hasExtra(EXTRA_DEFAULT_SELECTED_LIST)) {
+        if (mode == MODE_MULTI && intent.hasExtra(EXTRA_DEFAULT_SELECTED_LIST)) {
             resultList = intent.getStringArrayListExtra(EXTRA_DEFAULT_SELECTED_LIST);
         }
+        int themeColor = Color.parseColor(intent.getStringExtra(EXTRA_THEME_COLOR));
+        int textColor = Color.parseColor(intent.getStringExtra(EXTRA_TEXT_COLOR));
 
         Bundle bundle = new Bundle();
         bundle.putInt(MultiImageSelectorFragment.EXTRA_SELECT_COUNT, mDefaultCount);
         bundle.putInt(MultiImageSelectorFragment.EXTRA_SELECT_MODE, mode);
         bundle.putBoolean(MultiImageSelectorFragment.EXTRA_SHOW_CAMERA, isShow);
         bundle.putStringArrayList(MultiImageSelectorFragment.EXTRA_DEFAULT_SELECTED_LIST, resultList);
+        bundle.putInt(MultiImageSelectorFragment.EXTRA_THEME_COLOR, themeColor);
+        bundle.putInt(MultiImageSelectorFragment.EXTRA_TEXT_COLOR, textColor);
 
         getSupportFragmentManager().beginTransaction()
                 .add(fakeR.getId("id", "image_grid"), Fragment.instantiate(this, MultiImageSelectorFragment.class.getName(), bundle))
@@ -75,17 +88,17 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
 
         // 完成按钮
         mSubmitButton = (Button) findViewById(fakeR.getId("id", "commit"));
-        if(resultList == null || resultList.size()<=0){
+        if (resultList == null || resultList.size() <= 0) {
             mSubmitButton.setText(fakeR.getId("string", "action_done"));
             mSubmitButton.setEnabled(false);
-        }else{
+        } else {
             updateDoneText();
             mSubmitButton.setEnabled(true);
         }
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(resultList != null && resultList.size() >0){
+                if (resultList != null && resultList.size() > 0) {
                     // 返回已选择的图片数据
                     Intent data = new Intent();
                     data.putStringArrayListExtra(EXTRA_RESULT, resultList);
@@ -94,6 +107,32 @@ public class MultiImageSelectorActivity extends FragmentActivity implements Mult
                 }
             }
         });
+
+        //Style
+        RelativeLayout actionBar = (RelativeLayout) findViewById(fakeR.getId("id", "action_bar"));
+        ImageView btnBack = (ImageView) findViewById(fakeR.getId("id", "btn_back"));
+        TextView textAction = (TextView) findViewById(fakeR.getId("id", "action_title"));
+        actionBar.setBackgroundColor(themeColor);
+        btnBack.setColorFilter(textColor);
+        textAction.setTextColor(textColor);
+        mSubmitButton.setBackgroundColor(themeColor);
+
+        int[][] states = new int[][] {
+                new int[] { android.R.attr.state_enabled}, // enabled
+                new int[] {-android.R.attr.state_enabled}, // disabled
+                new int[] {-android.R.attr.state_checked}, // unchecked
+                new int[] { android.R.attr.state_pressed}  // pressed
+        };
+
+        int lighterTextColor = Color.argb(200, Color.red(textColor), Color.green(textColor), Color.blue(textColor));
+        int[] colors = new int[] {
+                textColor,
+                lighterTextColor,
+                lighterTextColor,
+                textColor,
+        };
+        ColorStateList textColorState = new ColorStateList(states, colors);
+        mSubmitButton.setTextColor(textColorState);
     }
 
     private void updateDoneText(){

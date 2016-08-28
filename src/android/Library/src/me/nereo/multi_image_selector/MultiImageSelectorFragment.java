@@ -2,11 +2,16 @@ package me.nereo.multi_image_selector;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +66,9 @@ public class MultiImageSelectorFragment extends Fragment {
     public static final String EXTRA_SHOW_CAMERA = "show_camera";
     /** 默认选择的数据集 */
     public static final String EXTRA_DEFAULT_SELECTED_LIST = "default_result";
+    /** theme extra **/
+    public static final String EXTRA_THEME_COLOR = "theme_color";
+    public static final String EXTRA_TEXT_COLOR = "text_color";
     /** 单选 */
     public static final int MODE_SINGLE = 0;
     /** 多选 */
@@ -217,6 +225,19 @@ public class MultiImageSelectorFragment extends Fragment {
         });
 
         mFolderAdapter = new FolderAdapter(getActivity());
+
+        //style
+        int themeColor = getArguments().getInt(EXTRA_THEME_COLOR);
+        int textColor = getArguments().getInt(EXTRA_TEXT_COLOR);
+        mPopupAnchorView.setBackgroundColor(themeColor);
+        mCategoryText.setBackgroundColor(themeColor);
+        mCategoryText.setTextColor(textColor);
+        Drawable drawable = getResources().getDrawable(fakeR.getId("drawable", "multiimage_text_indicator"));
+        drawable.setColorFilter(textColor, PorterDuff.Mode.MULTIPLY);
+        drawable.setBounds(0, 15, 15, 30);
+        mCategoryText.setCompoundDrawables(null, null, drawable, null);
+        mPreviewBtn.setBackgroundColor(themeColor);
+        mPreviewBtn.setTextColor(textColor);
     }
 
     /**
