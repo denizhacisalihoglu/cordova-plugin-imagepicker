@@ -28,8 +28,8 @@
     BOOL selectMultiple = [[command.arguments objectAtIndex:2] boolValue];
     NSArray* selected = [command.arguments objectAtIndex:3];
     NSDictionary* options = [command.arguments objectAtIndex:4] ?: [NSDictionary dictionary];
-    UIColor* themeColor = [self colorFromHexString:([[options valueForKey:@"themeColor"] stringValue] ?: @"#000000")];
-    UIColor* textColor = [self colorFromHexString:([[options valueForKey:@"textColor"] stringValue] ?: @"#FFFFFF")];
+    UIColor* themeColor = [self colorFromHexString:(options[@"themeColor"] ?: @"#000000")];
+    UIColor* textColor = [self colorFromHexString:(options[@"textColor"] ?: @"#000000")];
 
     [self.commandDelegate runInBackground:^{
         NSMutableArray *ids = [NSMutableArray array];

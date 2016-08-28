@@ -13,7 +13,8 @@ MultiImagePicker.prototype.getPictures = function(success, fail, arg) {
         [ arg.showCamera,
           arg.maxNum || 9,
           (arg.maxNum || 1) > 1,
-          arg.selectedPath || []]);
+          arg.selectedPath || [],
+	  	  arg.style || {}]);
 };
 
 window.MultiImagePicker = new MultiImagePicker();

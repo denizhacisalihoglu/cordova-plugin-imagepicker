@@ -5,13 +5,20 @@
   "cordova": {
     "id": "com.lihau.multiimagepicker",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "keywords": [
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios",
+    "imagepicker",
+    "multiimagepicker",
+    "picker",
+    "plugin",
+    "image"
   ],
   "author": "Tan Li Hau",
-  "license": "ISC"
+  "license": "MIT"
 }
