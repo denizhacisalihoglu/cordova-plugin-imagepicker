@@ -1,6 +1,6 @@
 {
   "name": "multi-image-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pick Multiple Image for Android",
   "cordova": {
     "id": "com.lihau.multiimagepicker",
