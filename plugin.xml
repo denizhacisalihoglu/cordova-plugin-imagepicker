@@ -2,7 +2,7 @@
 <plugin id="com.lihau.multiimagepicker" version="0.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>multi-image-picker</name>
     <js-module name="MultiImagePicker" src="www/multi-image-picker.js">
-        <clobbers target="cordova.plugins.multi-image-picker" />
+        <clobbers target="MultiImagePicker" />
     </js-module>
     <platform name="android">
         <config-file target="config.xml" parent="/*">
