@@ -1,3 +1,5 @@
+# Warning: ⚠️This repo is not maintained. use at your own cost.
+
 # ImagePicker Plugin for Cordova (iOS and Android)
 
 This is a multi-image picker plugin for Cordova.
